@@ -60,8 +60,81 @@ var movies = [
 
 // create showMovies function
 
+function showMovies(){
+  var allMoviesEl = document.querySelector("#all-movies");
+  
+  var moviesNumberEl = document.querySelector("#movies-number");
+  moviesNumberEl.innerHTML = movies.length;
+
+  
+
+  var pElement;
+
+  movies.forEach(element => {
+    pElement = document.createElement("p");
+    pElement.innerHTML = "Title: "+element.title+"     Director: "+element.director;
+
+    allMoviesEl.appendChild(pElement);
+  });
+
+}
 
 // create a new movie object for your favorite movie
+// Task 2
 
+var myFavMovie = {
+  title: "Harry Potter",
+  director: "Leigh Whannell",
+  type: "magic",
+  haveWatched: true
+};
 
-// create addMovies function
+function addMovie(movie){
+  console.log("receiving "+movie.title);
+  movies.push(movie);
+}
+
+setTimeout(addMovie.bind(this, myFavMovie), 1000)
+setTimeout(showMovies, 2000);
+
+//There are 5 movies on the page
+
+// Task 4
+// Create a form anywhere on your page. The form should have
+// - 4 input text fieldsalert("Holi");, one for each property of your movie object
+// - a "save" button.
+// When the button is clicked
+// - The field values should be used to create a new movie object literal
+// - The new movie is then added to the list of movies and gets displayed on your page
+// TIP: Use the functions you created on tasks 1-3
+
+var buttonEl = document.querySelector("button");
+
+function addNewMovie(){
+  var titleEl = document.querySelector("#movieTitle");
+  var movieTitle = titleEl.value;
+  
+  var directorEl = document.querySelector("#movieDirector");
+  var movieDirector = directorEl.value;
+
+  var typeEl = document.querySelector("#movieType");
+  var movieType = typeEl.value;
+
+  var titleEl = document.querySelector("#movieTitle");
+  var movieTitle = titleEl.value;
+
+  var movieWatched = document.querySelector("#movieWatched").checked;
+
+  var newMovie = {
+    title: movieTitle,
+    director: movieDirector,
+    type: movieType,
+    haveWatched: movieWatched
+  };
+
+  addMovie(newMovie);
+  showMovies();
+
+}
+
+buttonEl.addEventListener("click", event => {event.preventDefault(); addNewMovie();});
